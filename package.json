@@ -1,17 +1,17 @@
 {
-  "name": "ts-node-pckg-starter",
+  "name": "notifx",
   "version": "0.0.0",
-  "description": "A TypeScript node package starter code",
+  "description": "Pluggable notification dispatcher to send notifications various channels.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cedrick-ah/ts-node-pckg-starter"
+    "url": "https://github.com/open-devans/notix"
   },
-  "author": "cedrick-ah",
+  "author": "cedrickah",
   "license": "MIT",
   "keywords": [
-    "starter",
-    "npm",
-    "typescript"
+    "notification",
+    "multi-channel",
+    "pluggalble"
   ],
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",

@@ -1,10 +1,10 @@
-# Contributing to ts-node-pckg-starter
+# Contributing to notifx
 
 ## Issue contributions
 
 ### Did you find a bug?
 
-Open a [new issue](https://github.com/cedrick-ah/ts-node-pckg-starter/issues/new).
+Open a [new issue](https://github.com/open-devans/notifx/issues/new).
 Be sure to include a title and clear description, with as much relevant information
 as possible. If you have a code sample that illustrates the problem that would be even better!
 
@@ -12,13 +12,13 @@ as possible. If you have a code sample that illustrates the problem that would b
 
 ### Fork
 
-Fork the project [on GitHub](https://github.com/cedrick-ah/ts-node-pckg-starter)
+Fork the project [on GitHub](https://github.com/open-devans/notifx)
 and check out your copy locally.
 
 ```
-git clone git@github.com:username/ts-node-pckg-starter.git
-cd ts-node-pckg-starter
-git remote add upstream https://github.com/cedrick-ah/ts-node-pckg-starter.git
+git clone git@github.com:username/notifx.git
+cd notifx
+git remote add upstream https://github.com/open-devans/notifx.git
 ```
 
 ### Branch
@@ -57,7 +57,7 @@ git rebase upstream/main
 git push origin my-contrib-branch
 ```
 
-Go to https://github.com/yourusername/ts-node-pckg-starter and select your feature branch.
+Go to https://github.com/yourusername/notifx and select your feature branch.
 Click the 'Pull Request' button and fill out the form.
 
 ## Releasing
@@ -68,6 +68,6 @@ These are mostly notes for mainteners.
 -   Run standard-version: `npm run release` - this will run the `ci` task
 -   Push to GitHub: `git push --follow-tags origin main`
 -   Publish to npmjs.com: `npm publish`
--   Assuming all goes well, head over to https://github.com/cedrick-ah/ts-node-pckg-starter.git/releases
+-   Assuming all goes well, head over to https://github.com/open-devans/notifx.git/releases
     and update the release with any relevant notes. The generated CHANGELOG.md file should
     be updated, so you can use it to document release changes.
