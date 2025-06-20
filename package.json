@@ -42,6 +42,7 @@
         "@types/eslint": "^8.56.10",
         "@types/jest": "^29.5.12",
         "@types/node": "^20.12.12",
+        "@types/nodemailer": "^6.4.17",
         "@typescript-eslint/eslint-plugin": "^7.9.0",
         "@typescript-eslint/parser": "7.9.0",
         "commitizen": "^4.3.0",
@@ -57,5 +58,9 @@
         "tslint-config-prettier": "^1.18.0",
         "typedoc": "^0.25.4",
         "typescript": "^5.4.5"
+    },
+    "dependencies": {
+        "handlebars": "^4.7.8",
+        "nodemailer": "^7.0.3"
     }
 }

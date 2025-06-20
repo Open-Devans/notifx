@@ -1,4 +1,4 @@
-import notifx from "../src";
+import notifx from "../src/notifx";
 import { Dispatcher } from "../types";
 
 describe("Notifx", () => {
