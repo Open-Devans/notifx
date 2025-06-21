@@ -23,7 +23,7 @@ const telegramPlugin = {
                     parse_mode: "HTML",
                 });
 
-                console.log(`📨 Telegram message sent to ${chatId}`);
+                console.log(`Telegram message sent to ${chatId}`);
                 return response.data;
             } catch (error: any) {
                 console.error(
