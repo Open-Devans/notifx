@@ -1,17 +1,15 @@
 import axios from "axios";
 import handlebars from "handlebars";
 
-interface TelegramReplacements {
-    message: Record<string, any>;
-}
-
 const telegramPlugin = {
     sendTelegramMessage:
         (botToken: string) =>
         async (
             chatId: string,
             message: string,
-            replacements: TelegramReplacements
+            replacements: {
+                message: Record<string, any>;
+            }
         ) => {
             const messageTemplate = handlebars.compile(message);
             const parsedMessage = messageTemplate(replacements.message);
