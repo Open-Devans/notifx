@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
-import emailPlugin from "../../../src/plugins/email";
-import * as utils from "../../../src/utils";
+import emailPlugin from "../../src/plugins/email";
+import * as utils from "../../src/utils";
 
 jest.mock("nodemailer");
 const sendMailMock = jest.fn();
