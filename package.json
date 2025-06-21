@@ -25,7 +25,7 @@
         "dev": "rollup -c -w",
         "pack": "rollup -c",
         "build": "tsc -p ./tsconfig.json --outDir build --declaration true && api-extractor run",
-        "docs": "typedoc src --out docs",
+        "docs": "typedoc",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
         "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
         "release": "standard-version",

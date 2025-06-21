@@ -23,7 +23,7 @@ const replacements = {
     title: {
         username: "john",
     },
-    body: { injectedHTML: "Hello world!" },
+    body: { injectedHTML: "<p>Hello world!</p>" },
 };
 
 (async function () {

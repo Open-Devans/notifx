@@ -9,8 +9,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import axios from "axios";
 import handlebars from "handlebars";
+/**
+ * Telegram plugin for sending messages using the Telegram Bot API.
+ */
 const telegramPlugin = {
-    sendTelegramMessage: (botToken) => (chatId, message, replacements) => __awaiter(void 0, void 0, void 0, function* () {
+    /**
+     * Creates a Telegram message sender function that can be used as a notifx channel dispatcher.
+     *
+     * @param {string} botToken - The Telegram bot token.
+     * @returns {Function} An async function that sends a message via Telegram.
+     *
+     * @example
+     * const send = telegramPlugin.sendTelegramMessage(botToken);
+     * await send("123456789", "Hello <b>{{username}}</b>!", {
+     *   message: { username: "jonhdoe" }
+     * });
+     */
+    sendTelegramMessage: (botToken) => 
+    /**
+     * Sends a formatted message to a Telegram user or group.
+     *
+     * @param {string} chatId - Telegram `chat_id` (user, group, or channel).
+     * @param {string} message - Message template string using handlebars syntax.
+     * @param {{ message: Object }} replacements - Data for handlebars template.
+     * @returns {Promise<any>} Resolves with the Telegram API response data.
+     * @throws Will throw an error if the API call fails.
+     */
+    (chatId, message, replacements) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
         const messageTemplate = handlebars.compile(message);
         const parsedMessage = messageTemplate(replacements.message);
@@ -19,15 +44,15 @@ const telegramPlugin = {
             const response = yield axios.post(url, {
                 chat_id: chatId,
                 text: parsedMessage,
-                parse_mode: "HTML", // Allows formatting with <b>, <i>, etc.
+                parse_mode: "HTML",
             });
-            console.log(`📨 Telegram message sent to ${chatId}`);
+            console.log(`Telegram message sent to ${chatId}`);
             return response.data;
         }
         catch (error) {
             console.error("Telegram send error:", ((_a = error.response) === null || _a === void 0 ? void 0 : _a.data) || error.message);
             throw error;
         }
-    })
+    }),
 };
 export default telegramPlugin;
