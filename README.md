@@ -13,10 +13,8 @@
 
 ## Installation
 
-Clone the repo:
-
 ```bash
-npx expo notifx
+npm install notifx
 ```
 
 ## Usage
