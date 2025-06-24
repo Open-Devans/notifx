@@ -29,14 +29,12 @@ const replacements = {
 (async function () {
     const channel = "email";
     await notifx.registerChannel(channel, emailPlugin.sendEmail(mailerOptions));
-    await notifx.registerNotification(
-        "hello",
-        channel,
+    await notifx.registerNotification("hello", channel, [
         template,
         from,
         to,
         subject,
-        replacements
-    );
+        replacements,
+    ]);
     await notifx.send("hello");
 })();

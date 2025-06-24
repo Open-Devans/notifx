@@ -61,7 +61,7 @@ export class Notifx {
      * @throws {TypeError} If names are not strings.
      * @throws {Error} If the channel is not registered.
      */
-    registerNotification(notificationName, channelName, ...args) {
+    registerNotification(notificationName, channelName, args) {
         if (typeof notificationName !== "string" ||
             typeof channelName !== "string") {
             throw new TypeError("Notification or channel name must be a  string");

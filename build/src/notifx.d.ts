@@ -45,7 +45,7 @@ export declare class Notifx {
      * @throws {TypeError} If names are not strings.
      * @throws {Error} If the channel is not registered.
      */
-    registerNotification(notificationName: string, channelName: string, ...args: any[]): void;
+    registerNotification(notificationName: string, channelName: string, args: any[]): void;
     /**
      * Sends a previously registered notification via its associated channel by invoking the channel's dispatcher function.
      *

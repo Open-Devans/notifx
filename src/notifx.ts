@@ -61,7 +61,7 @@ export class Notifx {
     registerNotification(
         notificationName: string,
         channelName: string,
-        ...args: any[]
+        args: any[]
     ) {
         if (
             typeof notificationName !== "string" ||

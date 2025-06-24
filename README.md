@@ -1,14 +1,13 @@
 # notifx
 
-**NotifX** is a lightweight, pluggable notification dispatching system for Node.js/TypeScript. It allows you to register notification channels (like Email, Telegram, ...) using built-in dispatcher functions or provide your own to handle a actual message delivery.
+**NotifX** is a lightweight, pluggable notification dispatching system for Node.js. Registers notification channels (like Email, Telegram, ...) using built-in dispatcher functions or provide your own to handle a actual message delivery.
 
 ## Features
 
 -   Register custom notification channels with dispatcher functions
--   Built-in plugins for Email (via Nodemailer) and Telegram
+-   Built-in plugins: Email (via Nodemailer), Telegram,... more to come
 -   Send notifications by name with flexible arguments
 -   Supports both synchronous and asynchronous dispatchers
--   Argument validation based on dispatcher function arity
 -   Type-safe in TypeScript
 
 ## Installation
@@ -20,7 +19,7 @@ npm install notifx
 ## Usage
 
 ```ts
-import notifx, { emailPlugin, telegramPlugin } from "notifx";
+import notifx, { emailPlugin } from "notifx";
 
 const channel = "email";
 const template =
@@ -38,8 +37,9 @@ const template =
 
 // Register a channel using the built-in email plugin
 notifx.registerChannel(
-    channel,
+    channel, // channel name
     emailPlugin.sendEmail({
+        // returns actual function that send emails
         host: "smtp.example.com",
         port: 587,
         auth: { user: "me@example.com", pass: "secret" },
@@ -48,16 +48,20 @@ notifx.registerChannel(
 
 // Register a notification to send a welcome email
 notifx.registerNotification(
-    "welcomeEmail",
-    channel,
-    template, // HTML body (can be a file path)
-    "me@example.com", // from
-    "user@example.com", // to
-    "Welcome {{username}}!", // subject
-    {
-        body: { username: "jonhdoe" },
-        title: { username: "jonhdoe" },
-    }
+    "welcomeEmail", // notification name
+    channel, // channel name
+    [
+        // The array will be spread as arguments of Email dispatcher to send email
+        template, // HTML body (can be a file path)
+        "me@example.com", // from
+        "user@example.com", // to
+        "Welcome {{username}}!", // subject
+        {
+            // replacements
+            body: { username: "jonhdoe" },
+            title: { username: "jonhdoe" },
+        },
+    ]
 );
 
 // Send the registered notification
@@ -68,14 +72,22 @@ await notifx.send("welcomeEmail");
 
 ### Email Plugin (via Nodemailer)
 
+[How to use](./src/plugins/email/README.md)
+
 ```ts
+import { emailPlugin } from "notifx";
+
 const send = emailPlugin.sendEmail(mailerOptions);
 await send(body, from, to, title, replacements, attachments?);
 ```
 
 ### Telegram Plugin (via Nodemailer)
 
+[How to use](./src/plugins/telegram/README.md)
+
 ```ts
+import { telegramPlugin } from "notifx";
+
 const send = telegramPlugin.sendTelegramMessage(botToken);
 await send(chatId, messageTemplate, { message: { username: "jonhdoe" } });
 ```
@@ -84,11 +96,13 @@ await send(chatId, messageTemplate, { message: { username: "jonhdoe" } });
 
 NotifX is designed to be flexible and extensible. Beyond the built-in plugins, you can register your own custom dispatcher functions to handle message delivery any way you want.
 
-A dispatcher function is simply a function that accepts a fixed set of arguments (matching those you register with a notification) and performs the actual delivery logic — it can be synchronous or asynchronous.
-How to register a custom dispatcher
+A dispatcher function is simply a function that accepts a fixed set of arguments (matching the array you provided when registerering a notification) and performs the actual delivery logic — it can be synchronous or asynchronous.
+See below how to register a custom dispatcher.
+
+This code will log: `Sending message to user@example.com: Hello there!`.
 
 ```ts
-// Define your custom dispatcher function
+// Define your custom dispatcher function.
 const myDispatcher = async (recipient: string, message: string) => {
     // Implement your custom delivery logic here
     console.log(`Sending message to ${recipient}: ${message}`);
@@ -103,12 +117,11 @@ const message = "Hello there!";
 notifx.registerChannel("customChannel", myDispatcher);
 
 // Register a notification using your custom channel
-notifx.registerNotification(
-    "myNotification",
-    "customChannel",
+notifx.registerNotification("myNotification", "customChannel", [
+    // The array will be spread as  arguments of myDispatch when calling it
     recipient,
-    message
-);
+    message,
+]);
 
 // Send the notification
 await notifx.send("myNotification");
@@ -116,9 +129,8 @@ await notifx.send("myNotification");
 
 #### Important
 
--   The dispatcher function's parameters must match the arguments you provide when registering the notification.
--   The dispatcher can be asynchronous (return a Promise) or synchronous.
--   NotifX will invoke the dispatcher with the registered arguments unless you override them during send().
+-   The dispatcher function's parameters must match the array you provide when registering the notification.
+-   NotifX will invoke the dispatcher with the registered arguments unless you override them during send() passing additional arguments after the notification name.
 
 ## API
 
@@ -126,7 +138,7 @@ await notifx.send("myNotification");
 
 `Registers a dispatcher function for a given channel name.`
 
-### notifx.registerNotification(name, channel, ...args)
+### notifx.registerNotification(name, channel, dispatcherArgs)
 
 `Binds a notification name to a channel with specific arguments.`
 

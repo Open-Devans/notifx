@@ -1,6 +1,6 @@
 # emailPlugin
 
-Exports a `sendMail` function that acts as core logic for actual message delivery.
+It exports a `sendMail` function that acts as core logic for actual message delivery.
 
 ```ts
 const smtpConfig = {
@@ -22,11 +22,12 @@ const template =
 
 const send = emailPlugin.sendEmail(smtpConfig);
 await send(
-    template,
-    "from@example.com",
-    "to@example.com",
-    "Hello {{username}}",
+    template, // HTML body (can be a file path)
+    "from@example.com", // from
+    "to@example.com", // to
+    "Hello {{username}}", // subject
     {
+        // replacements
         body: { username: "jonhdoe" },
         title: { username: "jonhdoe" },
     }
