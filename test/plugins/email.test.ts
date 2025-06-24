@@ -5,7 +5,7 @@ import * as utils from "../../src/utils";
 jest.mock("nodemailer");
 const sendMailMock = jest.fn();
 
-jest.mock("../../../src/utils", () => ({
+jest.mock("../../src/utils", () => ({
     isFilePath: jest.fn(),
     readFile: jest.fn(),
 }));

@@ -5,7 +5,7 @@ jest.mock("axios");
 const mockedAxiosPost = axios.post as jest.Mock;
 
 describe("telegramPlugin.sendTelegramMessage", () => {
-    const botToken = "123:ABC";
+    const botToken = "dumb_token";
     const chatId = "987654321";
     const messageTemplate = "Hello <b>{{name}}</b>!";
     const replacements = {

@@ -40,12 +40,10 @@ describe("Notifx", () => {
     test("should register a notification", () => {
         const mockDispatcher: Dispatcher = jest.fn();
         notifx.registerChannel("email", mockDispatcher);
-        notifx.registerNotification(
-            "welcomeEmail",
-            "email",
+        notifx.registerNotification("welcomeEmail", "email", [
             "user@example.com",
-            "Hello"
-        );
+            "Hello",
+        ]);
 
         // @ts-ignore
         expect(notifx._notifications["welcomeEmail"]).toEqual({
@@ -56,7 +54,7 @@ describe("Notifx", () => {
 
     test("should throw if registering notification for unknown channel", () => {
         expect(() =>
-            notifx.registerNotification("notif1", "unknown", "data")
+            notifx.registerNotification("notif1", "unknown", ["data"])
         ).toThrow('Channel "unknown" is not registered');
     });
 
@@ -65,12 +63,10 @@ describe("Notifx", () => {
             (to: string, msg: string) => `Sent to ${to}: ${msg}`
         );
         notifx.registerChannel("email", dispatcher);
-        notifx.registerNotification(
-            "notif",
-            "email",
+        notifx.registerNotification("notif", "email", [
             "user@example.com",
-            "Hello"
-        );
+            "Hello",
+        ]);
 
         const result = await notifx.send("notif");
 
@@ -83,12 +79,10 @@ describe("Notifx", () => {
             (to: string, msg: string) => `Sent ${msg} to ${to}`
         );
         notifx.registerChannel("email", dispatcher);
-        notifx.registerNotification(
-            "notif",
-            "email",
+        notifx.registerNotification("notif", "email", [
             "user@example.com",
-            "Hello"
-        );
+            "Hello",
+        ]);
 
         const result = await notifx.send("notif", "other@example.com", "Hi");
 
@@ -99,7 +93,7 @@ describe("Notifx", () => {
     test("should throw if argument count does not match", async () => {
         const dispatcher = jest.fn((a: string, b: string) => {});
         notifx.registerChannel("email", dispatcher);
-        notifx.registerNotification("notif", "email", "onlyOneArg");
+        notifx.registerNotification("notif", "email", ["onlyOneArg"]);
 
         await expect(notifx.send("notif")).rejects.toThrow(
             'Channel "email" expects 2 arguments but got 1'
@@ -112,7 +106,7 @@ describe("Notifx", () => {
         });
 
         notifx.registerChannel("push", dispatcher);
-        notifx.registerNotification("asyncNotif", "push", "John");
+        notifx.registerNotification("asyncNotif", "push", ["John"]);
 
         const result = await notifx.send("asyncNotif");
         expect(result).toBe("Welcome John");
