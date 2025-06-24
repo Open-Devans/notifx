@@ -15,7 +15,7 @@ export default [
         plugins: [typescript({ tsconfig: "./tsconfig.json" })],
     },
     {
-        input: "build/index.d.ts",
+        input: "build/src/index.d.ts",
         output: [{ file: "dist/index.d.ts", format: "cjs" }],
         plugins: [dts()],
     },

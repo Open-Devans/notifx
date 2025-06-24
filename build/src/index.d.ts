@@ -1,7 +1,6 @@
 import notifx from "./notifx";
 import emailPlugin from "./plugins/email";
 import telegramPlugin from "./plugins/telegram";
-
 /**
  * Built-in plugins for the notifx notification system.
  *
@@ -15,7 +14,6 @@ import telegramPlugin from "./plugins/telegram";
  * await notifx.send('welcomeEmail');
  */
 export { emailPlugin, telegramPlugin };
-
 /**
  * The default NotifX dispatcher instance.
  *
