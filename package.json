@@ -1,6 +1,6 @@
 {
     "name": "notifx",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Pluggable notification dispatcher to send notifications to various channels.",
     "repository": {
         "type": "git",
